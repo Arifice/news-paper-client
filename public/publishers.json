@@ -1,0 +1,39 @@
+[
+    
+    {
+        "id":1,
+        "name":"THe New Yourk Times",
+        "email":"newyourktimes@gmail.com",
+        "image":"https://i.postimg.cc/J0LyHgvy/newyourk.jpg"
+    },
+    {
+        "id":2,
+        "name":"Daily Mail",
+        "email":"dailymail@gmail.com",
+        "image":"https://i.postimg.cc/tJs2Ms2Q/dailymail.jpg"
+    },
+    {
+        "id":3,
+        "name":"BBC news",
+        "email":"bbcnews@gmail.com",
+        "image":"https://i.postimg.cc/jdY55HT9/bbc.jpg"
+    },
+    {
+        "id":4,
+        "name":"CNN news",
+        "email":"cnnnews@gmail.com",
+        "image":"https://i.postimg.cc/g0y5VLBg/cnn.jpg"
+    },
+    {
+        "id":5,
+        "name":"Fox News",
+        "email":"foxnews@gmail.com",
+        "image":"https://i.postimg.cc/J4Bp3Bsj/fox.jpg"
+    },
+    {
+        "id":6,
+        "name":"Reuters",
+        "email":"reuters@gmail.com",
+        "image":"https://i.postimg.cc/vm8Dyf9n/routers.png"
+    }
+]

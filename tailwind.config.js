@@ -6,7 +6,14 @@ export default {
   ],
   theme: {
     extend: {},
+    fontFamily: {
+      'Cinzel': ['Cinzel', 'serif'],
+      'Roboto':['Roboto Slab', 'serif']
+    }
   },
   plugins: [require("daisyui")],
+  daisyui: {
+    themes: ["light", "dark"],
+  },
 }
 
