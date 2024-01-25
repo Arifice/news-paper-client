@@ -3,14 +3,14 @@ import { useQuery } from "@tanstack/react-query";
 
 
 const useArticles = () => {
-        const {data:article=[]}=useQuery({
+        const {data:articles=[]}=useQuery({
             queryKey:['articles'],
             queryFn:async()=>{
                 const res=await axiosPublic.get('/articles');
                 return res.data;
             }
         })
-        return [article];    
+        return [articles];    
 };
 
 export default useArticles;

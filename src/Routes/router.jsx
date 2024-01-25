@@ -16,6 +16,9 @@ import PremiumArticles from "../Pages/Dashboard/User/PremiumArticles";
 import Userhome from "../Pages/Dashboard/User/Userhome";
 import AdminRoute from "./AdminRoute";
 import ManagePublisher from "../Pages/Dashboard/Admin/ManagePublisher";
+import DetailsArticle from "../Components/DetailsArticle";
+import PrivateRoute from "./PrivateRoute";
+import AllArticles from "../Pages/AllArticles/AllArticles";
 
 export const router = createBrowserRouter([
     {
@@ -37,8 +40,18 @@ export const router = createBrowserRouter([
         },
         {
           path:'/allPublisher',
-          element:<AllPublisher></AllPublisher>
+          element:<PrivateRoute><AllPublisher></AllPublisher></PrivateRoute>
+        },
+        {
+          path:'/details/:id',
+          element:<PrivateRoute><DetailsArticle></DetailsArticle></PrivateRoute>,
+          loader:({params})=>fetch(`https://abc-news-server.vercel.app/articles/${params.id}`),
+        },
+        {
+          path:'/allarticles',
+          element:<AllArticles></AllArticles>
         }
+
 
       ]
     },

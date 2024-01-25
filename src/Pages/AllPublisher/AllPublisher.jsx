@@ -5,7 +5,7 @@ import usePublisher from "../../Hooks/usePublisher";
 import PublisherCategory from "./PublisherCategory";
 
 const AllPublisher = () => {
-    const [publisher]=usePublisher();
+    const [publishers]=usePublisher();
     return (
         <div>
             <Helmet>
@@ -13,7 +13,7 @@ const AllPublisher = () => {
             </Helmet>
             <Cover img={publisherimg} title={'Our All Publishers'}></Cover>            
             {
-                publisher.map((publisher,idx)=><PublisherCategory key={idx} publisher={publisher}></PublisherCategory>)
+                publishers.map((publisher,idx)=><PublisherCategory key={idx} publisher={publisher}></PublisherCategory>)
             }
         </div>
     );

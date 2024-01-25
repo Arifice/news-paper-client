@@ -7,11 +7,9 @@ import Swal from "sweetalert2";
 import { Helmet } from "react-helmet-async";
 import SectionTitle from "../../Components/SectionTitle";
 import { axiosPublic } from "../../Hooks/useAxiosPublic";
-// import useAxiosSecure from "../../Hooks/useAxiosSecure";
-// import axios from "axios";
-// const img_api_key=`https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_image_api_key}`
+
 const SignUp = () => {
-    // const axiosSecure=useAxiosSecure();
+   
     const {createUser,updateUserProfile,emailVerification}=useAuth();    
     const {register,reset, handleSubmit,formState: { errors }} = useForm()
     const location=useLocation();
@@ -20,19 +18,28 @@ const SignUp = () => {
 
     
     
-      const onSubmit =(data) => {
-        console.log(data);  
-        const name=data.name;       
-        const email=data.email;       
-        const password=data.password; 
-        const photoUrl=data.photo;      
-        const image=data.image[0]; 
-
-
-        const userInfo={name,email,password,image,photoUrl}
-        console.log({userInfo});
-        
-        createUser(email,password)
+      const onSubmit =async(data) => {
+        console.log(data);       
+            const name=data.name;
+            const email=data.email;
+            const password=data.password;
+            const imageFile={image:data.image[0]};
+        const res= await axiosPublic.post(`https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_image_api_key}`,imageFile,{
+            headers:{
+                'content-type':'multipart/form-data'
+            }
+        })
+        console.log(res.data);
+        const profilePic=res.data?.data?.display_url;
+        if(res.data?.success){
+            const userInfo={
+                name:data.name,      
+                email:data.email,       
+                password:data.password, 
+                photoUrl:profilePic,
+            }
+            console.log({profilePic});
+            createUser(email,password)
             .then(result=>{
                 console.log(result.user);
                 emailVerification(email)
@@ -49,7 +56,7 @@ const SignUp = () => {
                         .catch(error=>{
                             console.log(error);
                         })
-                    updateUserProfile(name,photoUrl)
+                    updateUserProfile(name,profilePic)
                         .then(result=>{
                             console.log(result);
                             
@@ -79,8 +86,17 @@ const SignUp = () => {
             })
             .catch(error=>{
                 console.log(error);
+                Swal.fire({
+                    position: "top-end",
+                    icon: "error",
+                    title: `${error.message}`,
+                    showConfirmButton: false,
+                    timer: 1000
+                  });
             })
 
+        }       
+        
       }
     
      
@@ -121,13 +137,13 @@ const SignUp = () => {
                             <input type="file"  {...register("image", { required: false })} className="file-input file-input-bordered file-input-warning w-full" />
                             {errors.image?.type==='required' && <span className="text-red-600">This field is required</span>}
                         </div>
-                        <div className="form-control">
+                        {/* <div className="form-control">
                             <label className="label">
                                 <span className="label-text text-xl lg:text-3xl">Photo URL</span>
                             </label>
                             <input type="text"  {...register("photo", { required: false })} className="input text-xl lg:text-3xl input-bordered" />
                             {errors.image?.type==='required' && <span className="text-red-600">This field is required</span>}
-                        </div>
+                        </div> */}
                         <div className="form-control">
                             <label className="label">
                                 <span className="label-text text-xl lg:text-3xl">Email</span>

@@ -46,6 +46,7 @@ const Navbar = () => {
     const links=<>
             <li><NavLink to={'/'} className='lg:text-2xl'>Home</NavLink></li>
             <li><NavLink to={'/allPublisher'} className='lg:text-2xl'>Publisher</NavLink></li>
+            <li><NavLink to={'/allarticles'} className='lg:text-2xl'>All Articles</NavLink></li>
             <li><NavLink to={'/dashboard/myarticles'} className='lg:text-2xl'>Dashboard</NavLink></li>
             
             <li>

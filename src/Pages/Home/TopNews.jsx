@@ -4,7 +4,7 @@ import useArticles from "../../Hooks/useArticles";
 import ArticlesCard from "../../Components/ArticlesCard";
 
 const TopNews = () => {
-    const articles=useArticles();
+    const [articles]=useArticles();
     const topNews=articles.filter(article=>article?.type=='breaking');
     return (
         <section className="my-16">
