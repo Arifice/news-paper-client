@@ -8,14 +8,12 @@ import useAdmin from "../../Hooks/useAdmin";
 import { axiosSecure } from "../../Hooks/useAxiosSecure";
 import Swal from "sweetalert2";
 
-
-
 const AllArticles = () => {
     const [isAdmin]=useAdmin();
     const {data:articles=[],refetch}=useQuery({
         queryKey:['articles'],
         queryFn:async()=>{
-            const res=await axiosPublic.get('https://abc-news-server.vercel.app/articles');
+            const res=await axiosPublic.get('http://localhost:5000/articles');
             return res.data;
         }
     })
@@ -58,7 +56,7 @@ const AllArticles = () => {
             </div>
             <h1 className="text-3xl font-Cinzel font-semibold text-center">Total Articles : {articles.length}</h1>
 
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
                 {
                     articles.map(article=>(
                         <div key={article._id} className="card  bg-base-100 shadow-xl">
@@ -70,7 +68,7 @@ const AllArticles = () => {
                                    {
                                     isAdmin && <>
                                         <button onClick={()=>handleDelete(article._id)} className="text-5xl btn-warning text-warning p-3 bg-base-200"><FaTrash></FaTrash></button>
-                                        <button className="text-5xl btn-warning text-success p-3 bg-base-200"><FaEdit></FaEdit></button>
+                                       <Link to={`/dashboard/updatearticle/${article._id}`}> <button className="text-5xl btn-warning text-success p-3 bg-base-200"><FaEdit></FaEdit></button></Link>
                                     </>
                                    }
                                     <Link to={`/details/${article._id}`}><button className="btn btn-ghost bg-slate-300 border-0 lg:text-3xl btn-outline border-b-4">Details</button></Link>

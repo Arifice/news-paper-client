@@ -3,6 +3,8 @@ import { MdArticle, MdSubscriptions } from "react-icons/md";
 import { FaAd, FaHome, FaList, FaUsers } from "react-icons/fa";
 import useAdmin from "../Hooks/useAdmin";
 import { SiAffinitypublisher } from "react-icons/si";
+import BreakingNews from "../Pages/Home/BreakingNews";
+
 
 
 const DashboardLayout = () => {
@@ -49,7 +51,9 @@ const DashboardLayout = () => {
             </div>
             {/* Dashbord content */}
             <div className="flex-1">
+            <BreakingNews></BreakingNews>
                 <Outlet></Outlet>
+                
             </div>
             
         </div>

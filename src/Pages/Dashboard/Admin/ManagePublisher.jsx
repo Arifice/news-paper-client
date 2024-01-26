@@ -1,53 +1,15 @@
-import { useQuery } from "@tanstack/react-query";
-import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import Swal from "sweetalert2";
 import { Helmet } from "react-helmet-async";
 import SectionTitle from "../../../Components/SectionTitle";
-import { FaTrash, } from "react-icons/fa";
-import { SiAffinitypublisher } from "react-icons/si";
+import { FaEdit, FaTrash, } from "react-icons/fa";
+import { Link } from "react-router-dom";
+import usePublisher from "../../../Hooks/usePublisher";
+import { axiosSecure } from "../../../Hooks/useAxiosSecure";
 
-const ManagePublisher = () => {
-    const axiosSecure=useAxiosSecure();
-    const {data: publishers=[],refetch}=useQuery({
-        queryKey:['publishers'],
-        queryFn:async()=>{
-            const res = await axiosSecure.get('/publishers');
-            return res.data;                
-        },
-        
-    })
+const ManagePublisher = () => {    
+    const [publishers,refetch] =usePublisher(); 
 
-    const handleMakeAdmin=(user)=>{
-        Swal.fire({
-            title: "Are you sure?",
-            text: "You won't be able to revert this!",
-            icon: "warning",
-            showCancelButton: true,
-            confirmButtonColor: "#3085d6",
-            cancelButtonColor: "#d33",
-            confirmButtonText: "Yes, Make Admin!"
-          }).then((result) => {
-            if (result.isConfirmed) {
-            axiosSecure.patch(`/users/admin/${user._id}`)
-                .then(res=>{
-                    console.log(res.data);
-                    if(res.data.modifiedCount>0){
-                        refetch();
-                        Swal.fire({
-                            title: "Success",
-                            text: `${user.name} is admin now`,
-                            icon: "success",
-                            timer:'1500',
-                            });
-                    }
-                }) 
-            }
-        }
-    )}      
-
-    
-
-    const handleDelete=(user)=>{
+    const handleDelete=(id)=>{
         Swal.fire({
             title: "Are you sure?",
             text: "You won't be able to revert this!",
@@ -58,17 +20,16 @@ const ManagePublisher = () => {
             confirmButtonText: "Yes, delete it!"
           }).then((result) => {
             if (result.isConfirmed) {
-
-                axiosSecure.delete(`/users/${user._id}`)
+                axiosSecure.delete(`/publishers/${id}`)
                     .then(res=>{
                         console.log(res.data);
                         if(res.data?.deletedCount>0){
                             refetch();
                             Swal.fire({
                                 title: "Deleted!",
-                                text: `${user.name} has been deleted.`,
+                                text: `Publisher has been deleted`,
                                 icon: "success",
-                                timer:'1500',
+                                timer:1000
                               });
                         }
                     })
@@ -83,7 +44,7 @@ const ManagePublisher = () => {
                 <title>News/All Publishers</title>
             </Helmet>   
             <div>
-                <SectionTitle heading={'All Publishers'} subHeading={'manage'}></SectionTitle>
+                <SectionTitle heading={'Manage Publishers'} subHeading={'manage'}></SectionTitle>
             </div>
             <h1 className="text-5xl text-center font-Cinzel mt-20 ">Total Publishers :  {publishers.length} </h1>
             <div>
@@ -96,8 +57,8 @@ const ManagePublisher = () => {
                             <th>Image</th>
                             <th>Name</th>
                             <th>Email</th>
-                            <th>Role</th>
-                            <th>Action</th>
+                            <th>Edit</th>
+                            <th>Delete</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -108,13 +69,10 @@ const ManagePublisher = () => {
                                 <td>{publisher.name}</td>
                                 <td>{publisher.email}</td>
                                 <th>
-                                    {
-                                        publisher?.role==='admin'? 'Admin' : <button onClick={()=>handleMakeAdmin(publisher)} className="btn bg-orange-600 text-white btn-ghost text-3xl btn-outline"><SiAffinitypublisher></SiAffinitypublisher></button>
-                                    
-                                    }
+                                    <Link to={`/dashboard/updatepublisher/${publisher._id}`}><button  className="btn bg-orange-600 text-white btn-ghost text-3xl btn-outline"><FaEdit></FaEdit></button></Link>
                                 </th>
                                 <th>
-                                        <button onClick={()=>handleDelete(publisher)} className="btn bg-red-600 text-white btn-ghost text-3xl btn-outline"><FaTrash></FaTrash></button>
+                                        <button onClick={()=>handleDelete(publisher._id)} className="btn bg-red-600 text-white btn-ghost text-3xl btn-outline"><FaTrash></FaTrash></button>
                                 </th>
                             </tr>)
                             }

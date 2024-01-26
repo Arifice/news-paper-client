@@ -10,7 +10,7 @@ import DashboardLayout from "../Layouts/DashboardLayout";
 import AllUsers from "../Pages/Dashboard/Admin/AllUsers";
 import Adminhome from "../Pages/Dashboard/Admin/Adminhome";
 import AddPublisher from "../Pages/Dashboard/Admin/AddPublisher";
-import Subscription from "../Pages/Dashboard/Admin/Subscription";
+import Subscription from "../Pages/Dashboard/User/Subscription";
 import AddArticles from "../Pages/Dashboard/User/AddArticles";
 import PremiumArticles from "../Pages/Dashboard/User/PremiumArticles";
 import Userhome from "../Pages/Dashboard/User/Userhome";
@@ -19,6 +19,9 @@ import ManagePublisher from "../Pages/Dashboard/Admin/ManagePublisher";
 import DetailsArticle from "../Components/DetailsArticle";
 import PrivateRoute from "./PrivateRoute";
 import AllArticles from "../Pages/AllArticles/AllArticles";
+import UpdateArticle from "../Pages/AllArticles/UpdateArticle";
+import UpdatePublisher from "../Pages/Dashboard/Admin/UpdatePublisher";
+import Payment from "../Pages/Payment";
 
 export const router = createBrowserRouter([
     {
@@ -41,11 +44,11 @@ export const router = createBrowserRouter([
         {
           path:'/allPublisher',
           element:<PrivateRoute><AllPublisher></AllPublisher></PrivateRoute>
-        },
+        },        
         {
           path:'/details/:id',
           element:<PrivateRoute><DetailsArticle></DetailsArticle></PrivateRoute>,
-          loader:({params})=>fetch(`https://abc-news-server.vercel.app/articles/${params.id}`),
+          loader:({params})=>fetch(`http://localhost:5000/articles/${params.id}`),
         },
         {
           path:'/allarticles',
@@ -80,6 +83,15 @@ export const router = createBrowserRouter([
           path:'subscription',
           element:<Subscription></Subscription>
         },
+        {
+          path:'updatearticle/:id',
+          element:<UpdateArticle></UpdateArticle>,
+          loader:({params})=>fetch(`http://localhost:5000/articles/${params.id}`)
+        },
+        {
+           path:'payment',
+           element:<Payment></Payment>
+        },
 
 
         // for admin
@@ -98,6 +110,11 @@ export const router = createBrowserRouter([
         {
           path:'managepublisher',
           element:<AdminRoute><ManagePublisher></ManagePublisher></AdminRoute>
+        },
+        {
+          path:'updatepublisher/:id',
+          element:<UpdatePublisher></UpdatePublisher>,
+          loader:({params})=>fetch(`http://localhost:5000/publishers/${params.id}`)
         }
         
         

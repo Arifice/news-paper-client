@@ -5,10 +5,14 @@ import useAxiosPublic from "../../../Hooks/useAxiosPublic";
 import { axiosSecure } from "../../../Hooks/useAxiosSecure";
 import Swal from "sweetalert2";
 import { SiAffinitypublisher } from "react-icons/si";
-import { useNavigate } from "react-router-dom";
+import { useLoaderData, useNavigate, useParams } from "react-router-dom";
 
 
-const AddPublisher = () => {   
+const UpdatePublisher = () => {  
+    const publisher=useLoaderData();
+    const {id}=useParams();
+    console.log(publisher,id);
+    const {name,email}=publisher;     
     const {register,handleSubmit,reset} = useForm()
     const axiosPublic=useAxiosPublic();   
     const navigate=useNavigate();
@@ -30,9 +34,9 @@ const AddPublisher = () => {
             }
             console.log({publisher});
             // secure data:
-            const articleRes=await axiosSecure.post('/publishers',publisher);
+            const articleRes=await axiosSecure.patch(`/publishers/${id}`,publisher);
             console.log(articleRes.data);
-            if(articleRes.data?.insertedId){
+            if(articleRes.data?.modifiedCount>0){
                 reset();
                 Swal.fire({
                     title: "Good job!",
@@ -47,10 +51,10 @@ const AddPublisher = () => {
     return (
         <div>
             <Helmet>
-                <title>News/Add publidher</title>
+                <title>News/update publidher</title>
             </Helmet>
             <div>
-                <SectionTitle heading={'Add publishers'} subHeading={'manage'}></SectionTitle>
+                <SectionTitle heading={'update publishers'} subHeading={'hurry up'}></SectionTitle>
             </div>
 
             <div >
@@ -63,7 +67,7 @@ const AddPublisher = () => {
                         </div>
                         <input type="text"
                         {...register('name',{required:true})}
-                        placeholder="Publisher name " className="input text-3xl input-secondary input-bordered w-full" />
+                        placeholder="Publisher name " defaultValue={name} className="input text-3xl input-secondary input-bordered w-full" />
                        
                 </label>            
                         
@@ -74,7 +78,7 @@ const AddPublisher = () => {
                         </div>
                         <input type="email"
                         {...register('email',{required:true})}
-                        placeholder="publisher email " className="input text-3xl input-secondary input-bordered w-full" />
+                        placeholder="publisher email " defaultValue={email} className="input text-3xl input-secondary input-bordered w-full" />
                        
                     </label>          
                            
@@ -83,7 +87,7 @@ const AddPublisher = () => {
                         <input {...register('image',{required:true})} type="file"  className="file-input text-3xl file-input-bordered file-input-secondary w-1/2 " />
                     </div>
 
-                    <button className="btn btn-warning text-3xl font-Cinzel "><SiAffinitypublisher></SiAffinitypublisher>Add Publisher</button>
+                    <button className="btn btn-warning text-3xl font-Cinzel "><SiAffinitypublisher></SiAffinitypublisher>Update Publisher</button>
                 </form>
             </div>
             
@@ -91,4 +95,4 @@ const AddPublisher = () => {
     );
 };
 
-export default AddPublisher;
+export default UpdatePublisher;

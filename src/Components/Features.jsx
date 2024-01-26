@@ -1,5 +1,6 @@
 /* eslint-disable react/no-unescaped-entities */
-import SectionTitle from "../../Components/SectionTitle";
+import { Link } from "react-router-dom";
+import SectionTitle from "./SectionTitle";
 
 const Features = () => {
     return (
@@ -8,7 +9,7 @@ const Features = () => {
                 
             </SectionTitle>
             <div className="grid lg:grid-cols-3 grid-cols-1   rounded-lg shadow-2xl bg-black p-10 gap-5 justify-around">
-                <div className="border-warning text-white bg-black border-4 p-3 shadow-2xl hover:bg-red-700  hover:z-10 rounded-xl">
+                <div className="border-warning text-white bg-black border-4 p-3 shadow-2xl  rounded-xl">
                     <p className="  p-2 m-2 rounded-lg font-semibold text-2xl">Free For 1 Month</p>
                     <div  className="flex justify-between text-2xl font-bold p-5">
                         <div>
@@ -28,12 +29,12 @@ const Features = () => {
                         </ul>
                     </div>
                     <div className="flex justify-center">
-                        <button className="btn btn-warning border-0 border-b-4 lg:text-2xl font-Cinzel lg:font-semibold btn-outline">try free for 1 month</button>
+                       <Link to={'/dashboard/payment'}> <button className="btn btn-warning border-0 border-b-4 lg:text-2xl font-Cinzel lg:font-semibold btn-outline">try free for 1 month</button></Link>
                     </div>
                     <p className="p-5 text-center">Free for 1 month, then $10.99 per month after. Offer only available if you haven't tried Premium before. Terms apply</p>
 
                 </div>
-                <div className="border-warning text-white bg-black border-4 p-3 shadow-2xl hover:bg-red-500 hover:z-10 rounded-xl">
+                <div className="border-warning text-white bg-black border-4 p-3 shadow-2xl  rounded-xl">
                     <div className="flex justify-between items-center">
                         <p className="  p-2 m-2 rounded-lg font-bold text-2xl">Premium Duo</p>
                         <div className="font-Cinzel"> 
@@ -50,12 +51,12 @@ const Features = () => {
                         </ul>
                     </div>
                     <div className="flex justify-center">
-                        <button className="btn btn-warning border-0 border-b-4 lg:text-2xl font-Cinzel lg:font-semibold btn-outline">Get Premium Duo</button>
+                       <Link to={'/dashboard/payment'}> <button className="btn btn-warning border-0 border-b-4 lg:text-2xl font-Cinzel lg:font-semibold btn-outline">Get Premium Duo</button></Link>
                     </div>
                     <p className="p-5 text-center">For couples who resides at the same address. Terms apply</p>
 
                 </div>
-                <div className="border-warning text-white bg-black border-4 p-3 shadow-2xl hover:bg-red-500 hover:z-10 rounded-xl">
+                <div className="border-warning text-white bg-black border-4 p-3 shadow-2xl  rounded-xl">
                     <div className="flex justify-between items-center">
                             <p className="p-5 font-bold text-2xl">Premium Family</p>
                             <div className="font-Cinzel"> 
@@ -73,7 +74,7 @@ const Features = () => {
                         </ul>
                     </div>
                     <div className="flex justify-center">
-                        <button className="btn btn-warning border-0 border-b-4 lg:text-2xl font-Cinzel lg:font-semibold btn-outline">Get Premium family</button>
+                        <Link to={'/dashboard/payment'}><button className="btn btn-warning border-0 border-b-4 lg:text-2xl font-Cinzel lg:font-semibold btn-outline">Get Premium family</button></Link>
                     </div>
                     <p className="p-5 text-center">For up to 6 family members reading at the same address. Terms apply</p>
 
