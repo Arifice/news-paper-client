@@ -4,10 +4,15 @@ import useAuth from "../Hooks/useAuth";
 import Swal from "sweetalert2";
 import { useEffect, useState } from "react";
 import { MdSubscriptions } from "react-icons/md";
+import useSubscription from "../Hooks/useSubscription";
+import useAdmin from "../Hooks/useAdmin";
 
 
 const Navbar = () => {
   const {user,logOut}=useAuth();
+  const [isAdmin]=useAdmin();
+  const [subscription]=useSubscription();
+  console.log(subscription);
   const [theme,setTheme]=useState(localStorage.getItem("theme")?localStorage.getItem("theme"):"light");
   const navigate=useNavigate();
   const handleLogout=()=>{
@@ -47,13 +52,17 @@ const Navbar = () => {
             <li><NavLink to={'/'} className='lg:text-2xl'>Home</NavLink></li>
             <li><NavLink to={'/allPublisher'} className='lg:text-2xl'>Publisher</NavLink></li>
             <li><NavLink to={'/allarticles'} className='lg:text-2xl'>All Articles</NavLink></li>
-            <li><NavLink to={'/dashboard/myarticles'} className='lg:text-2xl'>Dashboard</NavLink></li>
+            <li>{
+              isAdmin? <NavLink to={'/dashboard/adminhome'} className='lg:text-2xl'>Dashboard</NavLink>
+              : <NavLink to={'/dashboard/userhome'} className='lg:text-2xl'>Dashboard</NavLink>
+              
+              }</li>
             
             <li>
                   <Link to={'/'}>
                       <button className="btn">
                                 <MdSubscriptions></MdSubscriptions>
-                              <div className="badge badge-secondary">Free</div>
+                              <div className="badge badge-secondary">{subscription?.subscription || 'Free'}</div>
                         </button>
                   </Link>
             </li>
@@ -103,7 +112,7 @@ const Navbar = () => {
               user? <>
                 <div className="flex gap-5 justify-center items-center">
                   <h1 className="text-2xl font-Cinzel font-semibold">{user.displayName}</h1>
-                  <figure><img className="w-16 h-16 rounded-full" src={user.photoURL} alt="" /></figure>
+                  <Link to={'/dashboard/userprofile'}><figure><img className="w-16 h-16 rounded-full" src={user.photoURL} alt="" /></figure></Link>
                   <button onClick={handleLogout} className="btn btn-warning">Log Out</button>
                 </div>
               </>

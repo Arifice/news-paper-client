@@ -7,9 +7,10 @@ import Swal from "sweetalert2";
 import { Helmet } from "react-helmet-async";
 import SectionTitle from "../../Components/SectionTitle";
 import { axiosPublic } from "../../Hooks/useAxiosPublic";
+import useSubscription from "../../Hooks/useSubscription";
 
 const SignUp = () => {
-   
+   const [,refetch]=useSubscription();
     const {createUser,updateUserProfile,emailVerification}=useAuth();    
     const {register,reset, handleSubmit,formState: { errors }} = useForm()
     const location=useLocation();
@@ -37,6 +38,7 @@ const SignUp = () => {
                 email:data.email,       
                 password:data.password, 
                 photoUrl:profilePic,
+                subscription:'Free',
             }
             console.log({profilePic});
             createUser(email,password)
@@ -71,6 +73,7 @@ const SignUp = () => {
                                             showConfirmButton: false,
                                             timer: 1000
                                           });
+                                          refetch();
                                           reset();
                                          navigate(from,{replace:true}) 
                                     }

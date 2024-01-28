@@ -33,6 +33,7 @@ const AddArticles = () => {
                 description:data.description,               
                 image:res.data.data?.display_url,
                 tags:data.tags,
+                status:'pending',
             }
             console.log({articleItem});
             // secure data:

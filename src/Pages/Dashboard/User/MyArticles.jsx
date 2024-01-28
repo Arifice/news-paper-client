@@ -4,8 +4,8 @@ import { useQuery } from "@tanstack/react-query";
 import { axiosSecure } from "../../../Hooks/useAxiosSecure";
 import useAuth from "../../../Hooks/useAuth";
 import Swal from "sweetalert2";
-import { FaEdit, FaTrash } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { FaTrash } from "react-icons/fa";
+
 
 
 const MyArticles = () => {
@@ -55,25 +55,51 @@ const MyArticles = () => {
             </div>
             <h1 className="text-3xl text-center">Total Articles : {articles.length}</h1>
         
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mx-5 py-10 gap-10">
-                {
-                    articles.map(article=>(
-                        <div key={article._id} className="card  bg-base-100 shadow-xl">
-                            <figure><img className="w-full h-64" src={article?.image} alt="Shoes" /></figure>
-                            <div className="card-body">
-                                <h2 className="card-title">{article?.title}</h2>
-                                <p>{article.description.slice(0,150)}</p>
-                                <div className="flex justify-evenly  mt-10">
-                                    <button onClick={()=>handleDelete(article._id)} className="text-5xl btn-warning text-warning p-3 bg-base-200"><FaTrash></FaTrash></button>
-                                   <Link to={`/dashboard/updatearticle/${article._id}`}> <button className="text-5xl btn-warning text-success p-3 bg-base-200"><FaEdit></FaEdit></button></Link>
+            <div className="overflow-x-auto w-full">
+                    <table className="table table-zebra-zebra m-10">
+                        {/* head */}
+                        <thead>
+                        <tr className="bg-orange-400 text-3xl font-Cinzel">
+                            <th>SL</th>
+                            <th>Image</th>                            
+                            <th>Title</th>
+                            <th>Description</th>                            
+                            <th>Tag</th>                            
+                            <th>publisher</th>                            
+                            <th>Status</th>                            
+                            <th>Delete</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                            {
+                                articles.map((article,idx)=><tr className="hover text-2xl" key={article._id}>
+                                <th>{idx+1}</th>                                
+                                <td className="w-24 h-24 rounded-lg"><img src={article.image} alt="" /></td>
+                                <td>{article.title}</td>
+                                <td>{article.description.slice(0,150)}</td>
+                                <td>{article.tags}</td>
+                                <td>{article.publisher}</td>
+                                <td>{article.status}</td>
+                                <td>
+                                    {
+                                        article.status==='confirmed'? <span className="text-green-600">{article.status}</span>
+                                        : <span>{article?.status}</span>
                                     
-                                </div>
-                            </div>
-                            </div>
-                    ))
-                }
-
-            </div>
+                                    }   
+                                </td>
+                                
+                                <th>
+                                    <button onClick={()=>handleDelete(article._id)} className="btn bg-red-600 text-white btn-ghost text-3xl btn-outline"><FaTrash></FaTrash></button>
+                                </th>
+                            </tr>)
+                            }
+                        
+                        {/* row 2 */}
+                        
+                        
+                        </tbody>
+                    </table>
+                </div>
         
         </div>
     );

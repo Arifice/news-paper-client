@@ -17,6 +17,7 @@ const AllArticles = () => {
             return res.data;
         }
     })
+    const displayArticles=articles.filter(article=>article?.status!=='pending');
 
     const handleDelete=(id)=>{
         Swal.fire({
@@ -58,7 +59,7 @@ const AllArticles = () => {
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
                 {
-                    articles.map(article=>(
+                    displayArticles.map(article=>(
                         <div key={article._id} className="card  bg-base-100 shadow-xl">
                             <figure><img className="w-full h-64" src={article?.image} alt="Shoes" /></figure>
                             <div className="card-body">

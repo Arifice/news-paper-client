@@ -21,7 +21,12 @@ import PrivateRoute from "./PrivateRoute";
 import AllArticles from "../Pages/AllArticles/AllArticles";
 import UpdateArticle from "../Pages/AllArticles/UpdateArticle";
 import UpdatePublisher from "../Pages/Dashboard/Admin/UpdatePublisher";
-import Payment from "../Pages/Payment";
+import Payment from "../Pages/Payment/Payment";
+import MyCart from "../Pages/Payment/MyCart";
+import PaymentHistory from "../Pages/Dashboard/Admin/PaymentHistory";
+import AproveArticles from "../Pages/Dashboard/Admin/AproveArticles";
+import Profile from "../Pages/Dashboard/User/Profile";
+
 
 export const router = createBrowserRouter([
     {
@@ -52,8 +57,8 @@ export const router = createBrowserRouter([
         },
         {
           path:'/allarticles',
-          element:<AllArticles></AllArticles>
-        }
+          element:<PrivateRoute><AllArticles></AllArticles></PrivateRoute>
+        },
 
 
       ]
@@ -65,32 +70,41 @@ export const router = createBrowserRouter([
         // all user
         {
           path:'userhome',
-          element:<Userhome></Userhome>
+          element:<PrivateRoute><Userhome></Userhome></PrivateRoute>
         },
         {
           path:'myarticles',
-          element:<MyArticles></MyArticles>
+          element:<PrivateRoute><MyArticles></MyArticles></PrivateRoute>
         },
         {
           path:'addarticles',
-          element:<AddArticles></AddArticles>
+          element:<PrivateRoute><AddArticles></AddArticles></PrivateRoute>
         },
         {
           path:'premiumarticles',
-          element:<PremiumArticles></PremiumArticles>
+          element:<PrivateRoute><PremiumArticles></PremiumArticles></PrivateRoute>
         },
         {
           path:'subscription',
-          element:<Subscription></Subscription>
+          element:<PrivateRoute><Subscription></Subscription></PrivateRoute>
         },
         {
           path:'updatearticle/:id',
-          element:<UpdateArticle></UpdateArticle>,
+          element:<PrivateRoute><UpdateArticle></UpdateArticle></PrivateRoute>,
           loader:({params})=>fetch(`http://localhost:5000/articles/${params.id}`)
         },
         {
-           path:'payment',
-           element:<Payment></Payment>
+           path:'payment/:id',
+          element:<Payment></Payment>,
+           loader:({params})=>fetch(`http://localhost:5000/cart/user/${params.id}`)
+        },
+        {
+          path:'mycart',
+          element:<PrivateRoute><MyCart></MyCart></PrivateRoute>
+        },
+        {
+          path:'userprofile',
+          element:<Profile></Profile>
         },
 
 
@@ -115,6 +129,14 @@ export const router = createBrowserRouter([
           path:'updatepublisher/:id',
           element:<UpdatePublisher></UpdatePublisher>,
           loader:({params})=>fetch(`http://localhost:5000/publishers/${params.id}`)
+        },
+        {
+          path:'paymenthistory',
+          element:<PaymentHistory></PaymentHistory>
+        },
+        {
+          path:'approvearticles',
+          element:<AproveArticles></AproveArticles>
         }
         
         

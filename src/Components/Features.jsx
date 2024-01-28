@@ -29,7 +29,7 @@ const Features = () => {
                         </ul>
                     </div>
                     <div className="flex justify-center">
-                       <Link to={'/dashboard/payment'}> <button className="btn btn-warning border-0 border-b-4 lg:text-2xl font-Cinzel lg:font-semibold btn-outline">try free for 1 month</button></Link>
+                        <h1 className=" text-warning border-warning border-b-4 lg:text-2xl font-Cinzel lg:font-semibold ">try free for 1 month</h1>
                     </div>
                     <p className="p-5 text-center">Free for 1 month, then $10.99 per month after. Offer only available if you haven't tried Premium before. Terms apply</p>
 
@@ -51,7 +51,7 @@ const Features = () => {
                         </ul>
                     </div>
                     <div className="flex justify-center">
-                       <Link to={'/dashboard/payment'}> <button className="btn btn-warning border-0 border-b-4 lg:text-2xl font-Cinzel lg:font-semibold btn-outline">Get Premium Duo</button></Link>
+                       <Link to={'/dashboard/subscription'}> <button className="btn btn-warning border-0 border-b-4 lg:text-2xl font-Cinzel lg:font-semibold btn-outline">Get Premium Duo</button></Link>
                     </div>
                     <p className="p-5 text-center">For couples who resides at the same address. Terms apply</p>
 
@@ -74,7 +74,7 @@ const Features = () => {
                         </ul>
                     </div>
                     <div className="flex justify-center">
-                        <Link to={'/dashboard/payment'}><button className="btn btn-warning border-0 border-b-4 lg:text-2xl font-Cinzel lg:font-semibold btn-outline">Get Premium family</button></Link>
+                        <Link to={'/dashboard/subscription'}><button className="btn btn-warning border-0 border-b-4 lg:text-2xl font-Cinzel lg:font-semibold btn-outline">Get Premium family</button></Link>
                     </div>
                     <p className="p-5 text-center">For up to 6 family members reading at the same address. Terms apply</p>
 
