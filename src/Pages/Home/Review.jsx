@@ -16,12 +16,7 @@ const Review = () => {
                     .then(res=>{
                         setreviews(res.data);
                     })
-
-    // fetch('http://localhost:5000/reviews')
-    //     .then(res=>res.json())
-    //     .then(result=>{
-    //         setreviews(result);
-    //     })
+    
    },[])
     
 

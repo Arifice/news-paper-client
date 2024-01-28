@@ -13,7 +13,7 @@ const AllArticles = () => {
     const {data:articles=[],refetch}=useQuery({
         queryKey:['articles'],
         queryFn:async()=>{
-            const res=await axiosPublic.get('http://localhost:5000/articles');
+            const res=await axiosPublic.get('https://abc-news-server.vercel.app/articles');
             return res.data;
         }
     })

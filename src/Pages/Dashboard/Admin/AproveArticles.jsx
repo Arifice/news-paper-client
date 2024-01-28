@@ -3,14 +3,13 @@ import SectionTitle from "../../../Components/SectionTitle";
 import { axiosSecure } from "../../../Hooks/useAxiosSecure";
 import Swal from "sweetalert2";
 import { FaTrash, } from "react-icons/fa";
-import { MdSelectAll } from "react-icons/md";
 import { GrCheckboxSelected } from "react-icons/gr";
 
 const AproveArticles = () => {
     const {data:articles=[],refetch}=useQuery({
         queryKey:['articles'],
         queryFn:async()=>{
-            const res=await axiosSecure.get(`http://localhost:5000/articles/admin?search=pending`);
+            const res=await axiosSecure.get(`/articles/admin?search=pending`);
             return res.data;
         }
     })

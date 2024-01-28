@@ -53,7 +53,7 @@ export const router = createBrowserRouter([
         {
           path:'/details/:id',
           element:<PrivateRoute><DetailsArticle></DetailsArticle></PrivateRoute>,
-          loader:({params})=>fetch(`http://localhost:5000/articles/${params.id}`),
+          loader:({params})=>fetch(`https://abc-news-server.vercel.app/articles/${params.id}`),
         },
         {
           path:'/allarticles',
@@ -65,7 +65,7 @@ export const router = createBrowserRouter([
     },
     {
       path:'/dashboard',
-      element:<DashboardLayout></DashboardLayout>,
+      element:<PrivateRoute><DashboardLayout></DashboardLayout></PrivateRoute>,
       children:[
         // all user
         {
@@ -91,12 +91,12 @@ export const router = createBrowserRouter([
         {
           path:'updatearticle/:id',
           element:<PrivateRoute><UpdateArticle></UpdateArticle></PrivateRoute>,
-          loader:({params})=>fetch(`http://localhost:5000/articles/${params.id}`)
+          loader:({params})=>fetch(`https://abc-news-server.vercel.app/articles/${params.id}`)
         },
         {
            path:'payment/:id',
           element:<Payment></Payment>,
-           loader:({params})=>fetch(`http://localhost:5000/cart/user/${params.id}`)
+           loader:({params})=>fetch(`https://abc-news-server.vercel.app/cart/user/${params.id}`)
         },
         {
           path:'mycart',
@@ -128,7 +128,7 @@ export const router = createBrowserRouter([
         {
           path:'updatepublisher/:id',
           element:<UpdatePublisher></UpdatePublisher>,
-          loader:({params})=>fetch(`http://localhost:5000/publishers/${params.id}`)
+          loader:({params})=>fetch(`https://abc-news-server.vercel.app/publishers/${params.id}`)
         },
         {
           path:'paymenthistory',
