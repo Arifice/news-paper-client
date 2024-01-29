@@ -70,7 +70,7 @@ const AuthProvider = ({children}) => {
             else{
                 // rremove token from 
                 localStorage.removeItem('token');
-                setLoading(false);
+                setLoading(true);
             }
         })
         return ()=>{

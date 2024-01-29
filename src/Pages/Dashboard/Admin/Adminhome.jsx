@@ -1,22 +1,20 @@
 import { Helmet } from "react-helmet-async";
 import SectionTitle from "../../../Components/SectionTitle";
 import Stat from "../../../Components/Stat";
-
 import { useQuery } from "@tanstack/react-query";
 import { axiosSecure } from "../../../Hooks/useAxiosSecure";
 import { BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid, PieChart, Pie, Legend } from 'recharts';
 import useAuth from "../../../Hooks/useAuth";
 
 const Adminhome = () => {
-    const {user}=useAuth();
+    const {user}=useAuth();  
     const { data: chartData = [] } = useQuery({
         queryKey: ['article-stat'],
         queryFn: async () => {
             const res = await axiosSecure.get('/articles-stat');
             return res.data;
         }
-    })
-
+    })    
     // barchart
 
     const colors = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', 'red', 'pink'];

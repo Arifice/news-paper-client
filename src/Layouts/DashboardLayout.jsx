@@ -32,6 +32,7 @@ const DashboardLayout = () => {
                          {/* for all user */}
                             <li><NavLink to={'/dashboard/userprofile'} className=' lg:text-2xl'><FaHome></FaHome>User Profile</NavLink></li>
                             <li><NavLink to={'/dashboard/userhome'} className=' lg:text-2xl'><FaHome></FaHome>User Home</NavLink></li>
+                            <li><NavLink to={'/dashboard/userpaymenthistory'} className=' lg:text-2xl'><FaHistory></FaHistory> Payment History</NavLink></li> 
                             
                            
                             

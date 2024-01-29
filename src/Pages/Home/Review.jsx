@@ -31,7 +31,7 @@ const Review = () => {
                  {
                     reviews.map(reveiw=><SwiperSlide key={reveiw._id}>
                         
-                        <div className="m-24 px-24 py-16 flex flex-col items-center">
+                        <div className="lg:m-24 m-4 p-4 lg:px-24 lg:py-16 flex flex-col items-center">
                          <div className="rating gap-1">
                                 <input type="radio" name="rating-3" className="mask mask-heart bg-red-400" />
                                 <input type="radio" name="rating-3" className="mask mask-heart bg-orange-400"  />

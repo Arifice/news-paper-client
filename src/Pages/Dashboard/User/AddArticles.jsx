@@ -6,11 +6,13 @@ import Swal from "sweetalert2";
 import useAxiosPublic from "../../../Hooks/useAxiosPublic";
 import  { axiosSecure } from "../../../Hooks/useAxiosSecure";
 import useAuth from "../../../Hooks/useAuth";
+import { useNavigate } from "react-router-dom";
 
 const AddArticles = () => {
     const {user}=useAuth();
     const {register,handleSubmit,reset} = useForm()
     const axiosPublic=useAxiosPublic();
+    const navigate=useNavigate();
     // const axiosSecure=useAxiosSecure();
     
       const onSubmit =async (data) => {
@@ -43,9 +45,11 @@ const AddArticles = () => {
                 Swal.fire({
                     title: "Good job!",
                     text: "You have successfully added an item",
-                    icon: "success"
+                    icon: "success",
+                    timer:1000,
                   });
                 reset();
+                navigate('/dashboard/myarticles');
 
             }
         }

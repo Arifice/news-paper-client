@@ -8,17 +8,22 @@ import useAdmin from "../../Hooks/useAdmin";
 import { axiosSecure } from "../../Hooks/useAxiosSecure";
 import Swal from "sweetalert2";
 
+
+
 const AllArticles = () => {
-    const [isAdmin]=useAdmin();
+    const [isAdmin]=useAdmin();   
+  
     const {data:articles=[],refetch}=useQuery({
         queryKey:['articles'],
         queryFn:async()=>{
-            const res=await axiosPublic.get('https://abc-news-server.vercel.app/articles');
+            const res=await axiosPublic.get('/articles');
             return res.data;
         }
     })
+    
+    
     const displayArticles=articles.filter(article=>article?.status!=='pending');
-
+   
     const handleDelete=(id)=>{
         Swal.fire({
             title: "Are you sure?",
@@ -47,6 +52,8 @@ const AllArticles = () => {
           })
     }
 
+   
+
     return (
         <div>
             <Helmet>
@@ -55,7 +62,8 @@ const AllArticles = () => {
             <div>                
                 <SectionTitle heading={'All Artoicles'}subHeading={'enjoy reading'}></SectionTitle>
             </div>
-            <h1 className="text-3xl font-Cinzel font-semibold text-center">Total Articles : {articles.length}</h1>
+            <h1 className="text-3xl font-Cinzel font-semibold text-center">Total Articles : {displayArticles.length}</h1>
+            
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
                 {
@@ -81,7 +89,7 @@ const AllArticles = () => {
 
             </div>
         
-        
+           
         </div>
     );
 };

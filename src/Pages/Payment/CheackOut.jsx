@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import useAuth from "../../Hooks/useAuth";
 import { axiosSecure } from "../../Hooks/useAxiosSecure";
 import Swal from "sweetalert2";
+import { axiosPublic } from "../../Hooks/useAxiosPublic";
 
 
 
@@ -81,10 +82,12 @@ const CheackOut = ({ cartItem, id }) => {
           status: 'complete',
         }
         console.log({ payment });
-        const res = await axiosSecure.post('/payments', payment);
-        console.log(res.data);
+        const res1 = await axiosSecure.post('/payments', payment);
+        console.log(res1.data);
+        const res2 = await axiosPublic.post('/payments/user', payment);
+        console.log(res2.data);
 
-        if (res.data?.paymentResult?.insertedId) {
+        if (res1.data?.paymentResult?.insertedId && res2.data?.paymentResult?.insertedId) {
           Swal.fire({
             title: "Thank You",
             text: "Your payment successfull",
@@ -109,7 +112,7 @@ const CheackOut = ({ cartItem, id }) => {
                                       
                                   })
 
-                            navigate('/dashboard/mycart')
+                            navigate('/dashboard/userpaymenthistory');
                        }
                       }
                       )

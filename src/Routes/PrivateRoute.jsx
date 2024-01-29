@@ -4,7 +4,8 @@ import useAuth from "../Hooks/useAuth";
 const PrivateRoute = ({children}) => {
     const {user,loading}=useAuth();
     const location=useLocation();
-    if(loading){
+    if(loading && user){
+
         return <progress className="progress w-56"></progress>
     }
     if(user){

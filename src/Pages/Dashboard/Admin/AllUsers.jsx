@@ -1,22 +1,13 @@
 import { Helmet } from "react-helmet-async";
 import SectionTitle from "../../../Components/SectionTitle";
 import Swal from "sweetalert2";
-import useAxiosSecure from "../../../Hooks/useAxiosSecure";
-import { useQuery } from "@tanstack/react-query";
 import { FaTrash, FaUsers } from "react-icons/fa";
+import useUsers from "../../Home/useUsers";
+import { axiosSecure } from "../../../Hooks/useAxiosSecure";
 
 
-const AllUsers = () => {
-    const axiosSecure=useAxiosSecure();
-    const {data: users=[],refetch}=useQuery({
-        queryKey:['users'],
-        queryFn:async()=>{
-            const res = await axiosSecure.get('/users');
-            return res.data;                
-        },
-        
-    })
-
+const AllUsers = () => {    
+    const [users,refetch] =useUsers();
     const handleMakeAdmin=(user)=>{
         Swal.fire({
             title: "Are you sure?",

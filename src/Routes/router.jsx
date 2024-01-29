@@ -26,6 +26,7 @@ import MyCart from "../Pages/Payment/MyCart";
 import PaymentHistory from "../Pages/Dashboard/Admin/PaymentHistory";
 import AproveArticles from "../Pages/Dashboard/Admin/AproveArticles";
 import Profile from "../Pages/Dashboard/User/Profile";
+import UserPaymentHistory from "../Pages/Dashboard/User/UserPaymentHistory";
 
 
 export const router = createBrowserRouter([
@@ -57,7 +58,7 @@ export const router = createBrowserRouter([
         },
         {
           path:'/allarticles',
-          element:<PrivateRoute><AllArticles></AllArticles></PrivateRoute>
+          element:<PrivateRoute><AllArticles></AllArticles></PrivateRoute>          
         },
 
 
@@ -65,7 +66,7 @@ export const router = createBrowserRouter([
     },
     {
       path:'/dashboard',
-      element:<PrivateRoute><DashboardLayout></DashboardLayout></PrivateRoute>,
+      element:<DashboardLayout></DashboardLayout>,
       children:[
         // all user
         {
@@ -94,9 +95,13 @@ export const router = createBrowserRouter([
           loader:({params})=>fetch(`https://abc-news-server.vercel.app/articles/${params.id}`)
         },
         {
-           path:'payment/:id',
+          path:'payment/:id',
           element:<Payment></Payment>,
-           loader:({params})=>fetch(`https://abc-news-server.vercel.app/cart/user/${params.id}`)
+          loader:({params})=>fetch(`https://abc-news-server.vercel.app/cart/user/${params.id}`)
+        },
+        {
+          path:'userpaymenthistory',
+          element:<PrivateRoute><UserPaymentHistory></UserPaymentHistory></PrivateRoute>
         },
         {
           path:'mycart',
@@ -104,7 +109,7 @@ export const router = createBrowserRouter([
         },
         {
           path:'userprofile',
-          element:<Profile></Profile>
+          element:<PrivateRoute><Profile></Profile></PrivateRoute>
         },
 
 
